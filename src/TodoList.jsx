@@ -4,7 +4,7 @@ export function TodoList({ todos, toggleTodo, deleteTodo }) {
     return (
         <ul className="list">
             {/* Use shrot circuiting: If not todo, message 'No Todos' will print */}
-            {todos.length === 0 && "No Todos"} 
+            {todos.length === 0 && "No List :("} 
 
             {todos.map(todo => {
                 return (
