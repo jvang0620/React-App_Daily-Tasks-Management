@@ -18,6 +18,22 @@ export default function App() {
     setNewItem("")
   }
 
+  //ToggleTodo function when user select check marks
+  function toggleTodo(id, completed) {
+    setTodos(currentTodos => {
+      return currentTodos.map(todo => {
+        //check which 'todo' do I want to change
+        if (todo.id == id) {
+          //return updated version of that
+          return { ...todo, completed}
+        }
+
+        //if no changes, return todo
+        return todo
+      })
+    })
+  }
+
   return (
     <> 
       <form onSubmit={handleSubmit} className="new-item-form">
@@ -37,8 +53,16 @@ export default function App() {
           return (
           <li key={todo.id}>
             <label>
-              <input type="checkbox" checked={todo.completed} />
+
+              <input type="checkbox" checked={todo.completed} 
+
+              //on change eventlistenr 
+              //when change check to uncheck, it will call 'toggleTodo' 
+              //and from a todo id and pass along whether or not it is check
+              onChange={e => toggleTodo(todo.id, e.target.checked)}/>
+
               {todo.title}
+
             </label>
             <button className='btn btn-danger'>Delete</button>
           </li>
