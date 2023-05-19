@@ -1,21 +1,17 @@
 import { useState } from "react"
+import { NewTodoForm } from "./NewTodoForm"
 import "./styles.css"
 
 export default function App() {
-  const [newItem, setNewItem] = useState("")
   const [todos, setTodos] = useState([])
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
+  function addTodo(title) {
     setTodos(currentTodos => {
       return [
         ...currentTodos,
-        { id: crypto.randomUUID(), title: newItem, completed: false },
+        { id: crypto.randomUUID(), title, completed: false },
       ]
     })
-
-    setNewItem("")
   }
 
   //ToggleTodo function when user select check marks
@@ -47,17 +43,10 @@ export default function App() {
 
   return (
     <> 
-      <form onSubmit={handleSubmit} className="new-item-form">
-        <div className="form-row">
-          <lable htmlFor="item">New Item</lable>
-          <input 
-            value={newItem} 
-            onChange={e => setNewItem(e.target.value)} type="text" 
-            id="item" 
-          />
-        </div>
-        <button className="btn">Add</button>
-      </form>
+      {/* Rendering codes from "NewTodoForm" class */}
+      {/* Pass down props */}
+      <NewTodoForm  onSubmit={addTodo} />
+
       <h1 className="header">Todo List</h1>
       <ul className="list">
 
